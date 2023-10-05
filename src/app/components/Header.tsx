@@ -7,7 +7,7 @@ export const Header = () => {
                 <Flex as="header" py="5" justifyContent="space-between" align="center">
                     <NextLink href='/' passHref>
                         <Heading as='h1' fontSize="2xl" cursor="pointer">
-                            SORT out THOUGHT!
+                            SORT out THOUGHTs !
                         </Heading>
                     </NextLink>
                 </Flex>

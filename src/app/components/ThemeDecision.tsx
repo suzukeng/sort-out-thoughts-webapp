@@ -19,7 +19,7 @@ export default function ThemeDecision({ handleSave }: Props) {
                         fontWeight={600}
                         fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                         lineHeight={'110%'}>
-                        SORT out THOUGHT!
+                        SORT out THOUGHTs!
                     </Heading>
                     <Image src='/images/sorted.png' alt='image of thoughts sorted'
                         boxSize='55%'
