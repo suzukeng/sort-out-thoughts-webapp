@@ -14,7 +14,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     const [errorMessage, setErrorMessage] = useState<string>('')
     useEffect(() => {
         console.log('aaaa', thought.thoughtList);
-        setCurrentThoughtList(thought.thoughtList)
+        if (thought.thoughtList) setCurrentThoughtList(thought.thoughtList)
     }, [thought]);
     const thoughtOnSubmit = () => {
         try {
