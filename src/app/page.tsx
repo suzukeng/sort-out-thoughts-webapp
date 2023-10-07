@@ -41,6 +41,10 @@ export default function Home() {
   }
   const createDerivation = (input: string, parentTitle: string, updatedThoughtList: string[]) => {
     if (!input.length) return
+    if (titleList.length > 20) {
+      //TODO:バリデーションとタイトルの最大数の検討
+      console.log('20個以上派生を作ることはできません')
+    }
     console.log('新しいタイトル', input)
     setIsEditing(true)
     const updatedThought: Thought = {
