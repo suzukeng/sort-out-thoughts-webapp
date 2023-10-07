@@ -2,7 +2,8 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { Flex, Input, Button, Text, Card, CardHeader, CardBody, Box, VStack, FormControl, FormHelperText } from "@chakra-ui/react";
 import { Thought } from "../type";
 import { z } from 'zod'
-const ThoughtTitleSchema = z.string().min(1, { message: '1文字以上入力してください。' }).max(40, { message: '40文字以内で入力してください。' })
+const ThoughtListSchema = z.array(z.string().min(1, { message: '1文字以上入力してください。' }).max(40, { message: '40文字以内で入力してください。' }))
+    .max(15, { message: '追加できるのは15個までです。' })
 interface props {
     thought: Thought
     createDerivation: Function,
@@ -17,7 +18,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     }, [thought]);
     const thoughtOnSubmit = () => {
         try {
-            ThoughtTitleSchema.parse(input)
+            ThoughtListSchema.parse([...currentThoughtList, input])
             setCurrentThoughtList([...currentThoughtList, input]);
             setInput('');
             setErrorMessage('')
@@ -39,7 +40,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     };
     const isError = (errorMessage !== '')
     return (
-        <Card width='1050px' minH='700px' justifyContent="space-between" p={2} border='2px' borderColor='green.400' bgColor='gray.50'>
+        <Card width='1050px' minH='700px' justifyContent="space-between" p={2} border='2px' borderColor='green.400' bgColor='gray.50' marginBottom='10px' >
             <CardHeader>
                 <Text as='b' fontSize='3xl'>
                     タイトル :
@@ -51,7 +52,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
                     <Text color='gray.500' fontSize='xl' marginBottom='10px'>メインテーマ</Text>
                 )
                 }
-                <Text fontSize='2xl'>なぜそう思ったのか（40文字以内）</Text>
+                <Text fontSize='2xl'>なぜそう思ったのか<Text as='span' fontSize='md' color='gray.500'>（40文字以内）（15個まで追加可能）</Text></Text>
                 <Flex width='900px' height='60px' justifyContent="space-between" p={1}>
                     <FormControl isInvalid={isError}>
                         <Input type='text' placeholder={`\"${thought.title.length >= 20 ? thought.title.slice(0, 20) + "..." : thought.title}\"について思ったことを記載してください`} height='50px' borderColor='blue.600'
@@ -68,7 +69,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
                 <Box>
                     <Text fontSize='xl'>Thought List</Text>
                 </Box>
-                <VStack as='ul' marginLeft='20px' marginTop='10px' spacing='5px'>
+                <VStack as='ul' marginTop='10px' marginLeft='20px' spacing='5px'>
                     {currentThoughtList.map((_, index: number, a: string[]) => (
                         <Flex key={index} as='li' width='950px' minH='48px' justifyContent="space-between">
                             <Box width='800px' minH='45px' border='2px' borderColor='green.400' bgColor='white' rounded='md'><Text fontSize='30px'>{a[a.length - 1 - index]}</Text></Box>
