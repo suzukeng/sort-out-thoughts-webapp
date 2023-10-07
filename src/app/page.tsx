@@ -1,11 +1,12 @@
 'use client'
 import React, { useEffect, useState } from "react"
-import { Thought } from "./type";
+import { Thought } from "./type"
 import { Center, Spinner, VStack, HStack, Box } from "@chakra-ui/react"
-import ThemeDecision from "./components/ThemeDecision";
-import ShowTitleList from "./components/ShowTitleList";
-import ShowTheme from "./components/ShowTheme";
-import ThoughtCard from "./components/ThoughtCard";
+import ThemeDecision from "./components/ThemeDecision"
+import ShowTitleList from "./components/ShowTitleList"
+import ShowTheme from "./components/ShowTheme"
+import ThoughtCard from "./components/ThoughtCard"
+import SessionEndAlart from './components/SessionEndAlart'
 function createNewThgouts(title: string, parentTitle: string): Thought {
   let emptyStringArr: string[] = []
   let newThought: Thought = { title, parentTitle, thoughtList: emptyStringArr };
@@ -19,7 +20,6 @@ export default function Home() {
   const [isEditing, setIsEditing] = useState<Boolean>(false);
   let arr: string[] = []
   const [currentThought, setCurrentThought] = useState<Thought>({ title: '', parentTitle: '', thoughtList: arr });
-
   useEffect(() => {
     console.log(index, thoughtList.length);
     console.log(titleList.length, titleList);
@@ -63,7 +63,7 @@ export default function Home() {
     setIsEditing(false)
   }
   return (
-    <>
+    <SessionEndAlart>
       {isEditing ? (
         <Center>
           <Spinner size='xl' />
@@ -82,6 +82,6 @@ export default function Home() {
             <ThemeDecision handleSave={addTitleList} />
           )
       )}
-    </>
+    </SessionEndAlart>
   );
 }
