@@ -7,7 +7,7 @@ import ShowTitleList from "./components/ShowTitleList"
 import ShowTheme from "./components/ShowTheme"
 import ThoughtCard from "./components/ThoughtCard"
 import SessionEndAlart from './components/SessionEndAlart'
-function createNewThgouts(title: string, parentTitle: string): Thought {
+function createNewThgouts(title: string, parentTitle: string | undefined): Thought {
   let emptyStringArr: string[] = []
   let newThought: Thought = { title, parentTitle, thoughtList: emptyStringArr };
   return newThought;
@@ -33,7 +33,7 @@ export default function Home() {
     if (!theme.length) setTheme(input);
     console.log(input)
     setIsEditing(true)
-    setThoughtList([...thoughtList, createNewThgouts(input, '')])
+    setThoughtList([...thoughtList, createNewThgouts(input, undefined)])
     setTitleList([...titleList, input])
     setIndex((index) => index + 1)
     console.log(titleList.length, titleList);
@@ -45,7 +45,7 @@ export default function Home() {
     setIsEditing(true)
     const updatedThought: Thought = {
       title: currentThought.title,
-      parentTitle: currentThought.title,
+      parentTitle: currentThought.parentTitle,
       thoughtList: updatedThoughtList
     }
     console.log(updatedThought)
