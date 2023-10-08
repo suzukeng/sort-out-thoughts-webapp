@@ -25,33 +25,36 @@ export default function ThemeDecision({ handleSave }: Props) {
     const isError = (errorMessage !== '')
     return (
         <>
-            <Container marginTop='100px' minH="70vh" maxW="container.xl" bgColor='red.100'>
+            <Container marginTop='90px' minH="70vh" maxW="container.xl">
                 <Stack
                     as={Box}
                     align={'center'}
                 >
                     <Heading
-                        fontWeight={600}
-                        fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+                        fontWeight={700}
+                        fontSize={{ base: '2xl', sm: '4xl', md: '8xl' }}
                         lineHeight={'110%'}>
                         SORT out THOUGHTs!
                     </Heading>
                     <Image src='/images/sorted.png' alt='image of thoughts sorted'
-                        boxSize='55%'
-                        p={8}
+                        boxSize='60%'
+                        p={10}
                     />
-                    <Text color={'gray.500'} fontSize='2xl'>
+                    <Text color='gray.500' fontSize='2xl'>
                         考えや悩みを整理しましょう
                     </Text>
-                    <Flex width='700px' height='120px' justifyContent="space-between" p={4} border='2px' borderColor='green.400' rounded='lg'>
+                    <Flex width='700px' height='120px' justifyContent="space-between" p={4}>
                         <FormControl isInvalid={isError}>
-                            <Input type='text' height='60px' placeholder='整理したいテーマを入力してください' fontSize='md' onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)} value={input} />
+                            <Input type='text' height='60px' placeholder='整理したいテーマを入力してください' fontSize='md'
+                                bgColor='gray.100'
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
+                                value={input} />
                             <FormHelperText>{errorMessage}</FormHelperText>
                         </FormControl>
                         <Button textColor='white' width='100px' height='60px' bgColor='blue.500' marginLeft='5px' onClick={() => handleSubmit()}>始める</Button>
                     </Flex >
                 </Stack>
-            </Container>
+            </Container >
         </>
     );
 }

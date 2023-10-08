@@ -12,7 +12,7 @@ export default function ShowTitleList({ titles, currentIndex, setIndex, parentIn
     const pIndex: number = (parentIndex !== undefined && Number.isSafeInteger(parentIndex) ? parentIndex : -1)
     console.log('pIndex', parentIndex, ':', pIndex)
     return (
-        <Flex minH='400px' width='400px' justifyContent="space-between" border='2px' borderColor='green.400' rounded='lg'
+        <Flex minH='400px' width='400px' justifyContent="space-between" border='2px' borderColor='blue.400' rounded='lg'
             bgColor='gray.50'
         >
             <VStack alignItems="start">
@@ -21,7 +21,7 @@ export default function ShowTitleList({ titles, currentIndex, setIndex, parentIn
                 </Box>
                 <VStack spacing='0px' marginLeft='5px'>
                     {reversedTitles.map((title: string, index: number, a: string[]) => (
-                        <Button key={index} minH='35px' width='380px' border='1px' borderColor='gray.200' rounded={0}
+                        <Button key={index} minH='35px' width='380px' border='1px' borderColor='gray.300' rounded={0}
                             whiteSpace='unset'
                             bgColor={
                                 currentIndex === a.length - index - 1 ? 'green.200' :
