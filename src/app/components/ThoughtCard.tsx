@@ -52,7 +52,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
                     タイトル :
                     <Text as='span' fontSize='3xl' color='blue.500'>{thought.title}</Text>
                 </Text>
-                <Text fontSize='2xl' marginTop='10px'>なぜそう思ったのか<Text as='span' fontSize='md' color='gray.500'>（40文字以内）（15個まで追加可能）</Text></Text>
+                <Text fontSize='2xl' marginTop='10px'>なぜ・いつまでに・どのように・どうしたいか<Text as='span' fontSize='md' color='gray.500'>（40文字以内）（15個まで追加可能）</Text></Text>
                 <Flex width='900px' height='60px' justifyContent="space-between" p={1}>
                     <FormControl isInvalid={isError}>
                         <Input type='text' placeholder={`\"${thought.title.length >= 20 ? thought.title.slice(0, 20) + "..." : thought.title}\"について思ったことを記載してください`} height='50px' borderColor='blue.600'
