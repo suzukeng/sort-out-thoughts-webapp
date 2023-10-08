@@ -4,12 +4,15 @@ interface props {
     titles: string[]
     currentIndex: number
     setIndex: Dispatch<SetStateAction<number>>
+    parentIndex: number | undefined
 }
-export default function ShowTitleList({ titles, currentIndex, setIndex }: props) {
+export default function ShowTitleList({ titles, currentIndex, setIndex, parentIndex }: props) {
     const reversedTitles = titles.map((_, i, a) => a[a.length - 1 - i])
     console.log('currentIndex', currentIndex, reversedTitles.length);
+    const pIndex: number = (parentIndex !== undefined && Number.isSafeInteger(parentIndex) ? parentIndex : -1)
+    console.log('pIndex', parentIndex, ':', pIndex)
     return (
-        <Flex minH='320px' width='320px' justifyContent="space-between" border='2px' borderColor='green.400' rounded='lg'
+        <Flex minH='400px' width='400px' justifyContent="space-between" border='2px' borderColor='blue.400' rounded='lg'
             bgColor='gray.50'
         >
             <VStack alignItems="start">
@@ -18,16 +21,23 @@ export default function ShowTitleList({ titles, currentIndex, setIndex }: props)
                 </Box>
                 <VStack spacing='0px' marginLeft='5px'>
                     {reversedTitles.map((title: string, index: number, a: string[]) => (
-                        <Button key={index} minH='35px' width='300px' border='1px' borderColor='gray.200' rounded={0}
+                        <Button key={index} minH='35px' width='380px' border='1px' borderColor='gray.300' rounded={0}
                             whiteSpace='unset'
-                            bgColor={currentIndex == a.length - index - 1 ? 'green.200' : 'gray.100'}
+                            bgColor={
+                                currentIndex === a.length - index - 1 ? 'green.200' :
+                                    pIndex === a.length - index - 1 ? 'green.50' :
+                                        'gray.100'
+                            }
                             _hover={{
                                 border: '2px',
                                 borderColor: 'gray.400'
                             }}
                             onClick={() => setIndex(a.length - 1 - index)}
                         >
-                            <Text fontSize='md'> {title}</Text>
+                            <Text fontSize='md'>{pIndex === a.length - index - 1 &&
+                                <Text as='b' color='gray.500'>【派生元】:</Text>
+                            }
+                                {title.length > 15 ? title.slice(0, 15) + '...' : title}</Text>
                         </Button>
                     ))
                     }

@@ -14,7 +14,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     const [errorMessage, setErrorMessage] = useState<string>('')
     useEffect(() => {
         console.log('aaaa', thought.thoughtList);
-        setCurrentThoughtList(thought.thoughtList)
+        if (thought.thoughtList) setCurrentThoughtList(thought.thoughtList)
     }, [thought]);
     const thoughtOnSubmit = () => {
         try {
@@ -40,19 +40,19 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     };
     const isError = (errorMessage !== '')
     return (
-        <Card width='1050px' minH='700px' justifyContent="space-between" p={2} border='2px' borderColor='green.400' bgColor='gray.50' marginBottom='10px' >
+        <Card width='1050px' minH='700px' justifyContent="space-between" p={2} border='2px' borderColor='blue.400' bgColor='gray.50' marginBottom='10px' >
             <CardHeader>
+                {thought.parentTitle ? (
+                    <Text color='gray.500' fontSize='xl'>派生元タイトル :<Text as='span' fontSize='xl'>{thought.parentTitle}</Text></Text>
+                ) : (
+                    <Text color='gray.500' fontSize='xl'>メインテーマ</Text>
+                )
+                }
                 <Text as='b' fontSize='3xl'>
                     タイトル :
                     <Text as='span' fontSize='3xl' color='blue.500'>{thought.title}</Text>
                 </Text>
-                {thought.parentTitle ? (
-                    <Text color='gray.500' fontSize='xl' marginBottom='10px'>派生元タイトル :<Text as='span' fontSize='xl'>{thought.parentTitle}</Text></Text>
-                ) : (
-                    <Text color='gray.500' fontSize='xl' marginBottom='10px'>メインテーマ</Text>
-                )
-                }
-                <Text fontSize='2xl'>なぜそう思ったのか<Text as='span' fontSize='md' color='gray.500'>（40文字以内）（15個まで追加可能）</Text></Text>
+                <Text fontSize='2xl' marginTop='10px'>なぜ・いつまでに・どのように・どうしたいか<Text as='span' fontSize='md' color='gray.500'>（40文字以内）（15個まで追加可能）</Text></Text>
                 <Flex width='900px' height='60px' justifyContent="space-between" p={1}>
                     <FormControl isInvalid={isError}>
                         <Input type='text' placeholder={`\"${thought.title.length >= 20 ? thought.title.slice(0, 20) + "..." : thought.title}\"について思ったことを記載してください`} height='50px' borderColor='blue.600'
@@ -72,7 +72,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
                 <VStack as='ul' marginTop='10px' marginLeft='20px' spacing='5px'>
                     {currentThoughtList.map((_, index: number, a: string[]) => (
                         <Flex key={index} as='li' width='950px' minH='48px' justifyContent="space-between">
-                            <Box width='800px' minH='45px' border='2px' borderColor='green.400' bgColor='white' rounded='md'><Text fontSize='30px'>{a[a.length - 1 - index]}</Text></Box>
+                            <Box width='800px' minH='45px' border='2px' borderColor='blue.400' bgColor='white' rounded='md'><Text fontSize='30px'>{a[a.length - 1 - index]}</Text></Box>
                             <Button textColor='white' bgColor='blue.400' width='70px' marginLeft='5px' minH='45px' border='1px' borderColor='blue.100' onClick={() => createNewDerivation(a[a.length - 1 - index])}>派生</Button>
                             <Button textColor='white' bgColor='red.400' width='70px' marginLeft='5px' minH='45px' border='1px' borderColor='red.100' onClick={() => delThoughtListItem(a.length - index - 1)}>削除</Button>
                         </Flex >

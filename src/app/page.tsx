@@ -7,9 +7,9 @@ import ShowTitleList from "./components/ShowTitleList"
 import ShowTheme from "./components/ShowTheme"
 import ThoughtCard from "./components/ThoughtCard"
 import SessionEndAlart from './components/SessionEndAlart'
-function createNewThgouts(title: string, parentTitle: string | undefined): Thought {
-  let emptyStringArr: string[] = []
-  let newThought: Thought = { title, parentTitle, thoughtList: emptyStringArr };
+
+function createNewThgout({ parentIndex = undefined, title, parentTitle = undefined, thoughtList = [] }: Thought): Thought {
+  let newThought: Thought = { parentIndex, title, parentTitle, thoughtList };
   return newThought;
 }
 export default function Home() {
@@ -18,13 +18,15 @@ export default function Home() {
   const [theme, setTheme] = useState<string>('');
   const [thoughtList, setThoughtList] = useState<Thought[]>([]);
   const [isEditing, setIsEditing] = useState<Boolean>(false);
+  const [parentIndex, setParentIndex] = useState<number | undefined>(undefined);
   let arr: string[] = []
-  const [currentThought, setCurrentThought] = useState<Thought>({ title: '', parentTitle: '', thoughtList: arr });
+  const [currentThought, setCurrentThought] = useState<Thought>(createNewThgout({ title: 'no title' }));
   useEffect(() => {
     console.log(index, thoughtList.length);
     console.log(titleList.length, titleList);
     if (index < 0 || index >= thoughtList.length) return;
     setCurrentThought(thoughtList[index]);
+    setParentIndex(thoughtList[index].parentIndex)
     console.log('更新後の中身', thoughtList)
   }, [index])
 
@@ -33,7 +35,7 @@ export default function Home() {
     if (!theme.length) setTheme(input);
     console.log(input)
     setIsEditing(true)
-    setThoughtList([...thoughtList, createNewThgouts(input, undefined)])
+    setThoughtList([...thoughtList, createNewThgout({ title: input })])
     setTitleList([...titleList, input])
     setIndex((index) => index + 1)
     console.log(titleList.length, titleList);
@@ -47,11 +49,12 @@ export default function Home() {
     }
     console.log('新しいタイトル', input)
     setIsEditing(true)
-    const updatedThought: Thought = {
+    const updatedThought: Thought = createNewThgout({
+      parentIndex: currentThought.parentIndex,
       title: currentThought.title,
       parentTitle: currentThought.parentTitle,
       thoughtList: updatedThoughtList
-    }
+    })
     console.log(updatedThought)
     console.log('result', thoughtList.map((value: Thought, id: number) => (
       index === id ? updatedThought : value
@@ -59,10 +62,11 @@ export default function Home() {
     setThoughtList(thoughtList => thoughtList.map((value: Thought, id: number) => (
       index === id ? updatedThought : value
     )))
-    const currentTitleListLength = titleList.length;
-    setThoughtList(thoughtList => [...thoughtList, createNewThgouts(input, parentTitle)])
-    setTitleList([...titleList, input])
-    setIndex(currentTitleListLength)
+    const prevTitleListLength = titleList.length;
+    console.log()
+    setThoughtList(thoughtList => [...thoughtList, createNewThgout({ parentIndex: index, title: input, parentTitle })])
+    setTitleList(titleList => [...titleList, input])
+    setIndex(index => prevTitleListLength)
     // console.log(titleList.length, titleList);
     setIsEditing(false)
   }
@@ -78,7 +82,7 @@ export default function Home() {
             <ShowTheme themeTitle={theme} />
             <HStack marginTop='10px' alignItems="start">
               <ThoughtCard thought={currentThought} createDerivation={createDerivation} />
-              <ShowTitleList titles={titleList} currentIndex={index} setIndex={setIndex} />
+              <ShowTitleList titles={titleList} currentIndex={index} setIndex={setIndex} parentIndex={parentIndex} />
             </HStack>
           </>
         ) :
