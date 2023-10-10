@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { Box, Container, Heading, Flex, Image, HStack } from '@chakra-ui/react'
+import { Box, Container, Heading, Flex, Image, HStack, Button } from '@chakra-ui/react'
 export const Header = () => {
     return (
         <Box as='header' height='75px' px={6} bgColor='blue.50'
@@ -7,16 +7,42 @@ export const Header = () => {
             borderBottomColor='gray.300'
         >
             <Container maxW='container.xxl'>
-                <HStack>
-                    <Image src='/images/SORT-out-THOUGHTs.png' alt='SORT-out-THOUTs-Icon' width='40px' height='40px' />
-                    <Flex as="header" py="5" justifyContent="space-between" align="center">
+                <Flex as="header" py="5" justifyContent="space-between" align="center">
+                    <HStack>
+                        <Image src='/images/SORT-out-THOUGHTs.png' alt='SORT-out-THOUTs-Icon' width='40px' height='40px' />
                         <NextLink href='/' passHref>
                             <Heading as='h1' fontSize="3xl" cursor="pointer">
                                 SORT out THOUGHTs !
                             </Heading>
                         </NextLink>
-                    </Flex>
-                </HStack>
+                    </HStack>
+                    <HStack spacing='20px'>
+                        <Button
+                            as={NextLink}
+                            fontSize="md"
+                            color="black"
+                            bg="blue.50"
+                            _hover={{
+                                bg: 'blue.50'
+                            }}
+                            href='/'
+                        >
+                            home
+                        </Button>
+                        <Button
+                            as={NextLink}
+                            fontSize="md"
+                            color="black"
+                            bg="blue.50"
+                            _hover={{
+                                bg: 'blue.50'
+                            }}
+                            href='/about'
+                        >
+                            about
+                        </Button>
+                    </HStack>
+                </Flex>
             </Container>
         </Box >
     )
