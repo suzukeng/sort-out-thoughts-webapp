@@ -13,9 +13,13 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "framer-motion": "^10.16.4",
+    "gray-matter": "^4.0.3",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
+    "remark": "^15.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-html": "^16.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
