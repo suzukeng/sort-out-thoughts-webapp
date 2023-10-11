@@ -1,19 +1,25 @@
-'use client'
-import { Heading, Box, Text } from '@chakra-ui/react'
-export default function about() {
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { remark } from "remark";
+import remarkHtml from "remark-html";
+import remarkBreaks from "remark-breaks";
+import { Heading, Box, Container, Center, Text } from '@chakra-ui/react'
+export default async function about() {
+    const filePath = path.join(process.cwd(), 'contents', 'about.md');
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(fileContents);
+    const { title, date } = data; // 記事のタイトル
+    const processedContent = await remark().use(remarkBreaks).use(remarkHtml).process(content);
+    const contentHtml = processedContent.toString(); // 記事の本文をHTMLに変換
+    console.log(contentHtml)
     return (
-        <Box m={4} bgColor='red.100'>
-            <Heading as='h1' fontSize='5xl'> About</Heading>
-            <Box>
-                <Box marginTop={4} marginLeft={4}>
-                    <Heading as='h2' fontSize='3xl'> このサイトについて</Heading>
-                    <Box marginLeft={2}>
-                        <Text fontSize='xl'>
-                            悩みや考えを書きたい
-                        </Text>
-                    </Box>
-                </Box>
-            </Box>
-        </Box>
+        <Center>
+            <Container m={4} maxW='container.xl' bgColor='gray.50'>
+                <Heading as='h1' fontSize='5xl'>{title}</Heading>
+                <Text color='gray.500' fontSize='md'>最終更新日:{date}</Text>
+                <Box marginTop={4} marginLeft={4} fontSize='xl' dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            </Container>
+        </Center >
     )
 }

@@ -8,14 +8,14 @@ export const Header = () => {
         >
             <Container maxW='container.xxl'>
                 <Flex as="header" py="5" justifyContent="space-between" align="center">
-                    <HStack>
-                        <Image src='/images/SORT-out-THOUGHTs.png' alt='SORT-out-THOUTs-Icon' width='40px' height='40px' />
-                        <NextLink href='/' passHref>
+                    <NextLink href='/' passHref>
+                        <HStack>
+                            <Image src='/images/SORT-out-THOUGHTs.png' alt='SORT-out-THOUTs-Icon' width='40px' height='40px' />
                             <Heading as='h1' fontSize="3xl" cursor="pointer">
                                 SORT out THOUGHTs !
                             </Heading>
-                        </NextLink>
-                    </HStack>
+                        </HStack>
+                    </NextLink>
                     <HStack spacing='20px'>
                         <Button
                             as={NextLink}

@@ -67,7 +67,7 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
             </CardHeader>
             <CardBody>
                 <Box>
-                    <Text fontSize='xl'>Thought List</Text>
+                    <Text as='h2' fontSize='xl'>Thought List</Text>
                 </Box>
                 <VStack as='ul' marginTop='10px' marginLeft='20px' spacing='5px'>
                     {currentThoughtList.map((_, index: number, a: string[]) => (
