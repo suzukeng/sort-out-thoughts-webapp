@@ -25,7 +25,7 @@ export default function ThemeDecision({ handleSave }: Props) {
     const isError = (errorMessage !== '')
     return (
         <>
-            <Container marginTop='90px' minH="70vh" maxW="container.xl">
+            <Container margin='5%' minH="70vh" maxW="container.xl">
                 <Stack
                     as={Box}
                     align={'center'}

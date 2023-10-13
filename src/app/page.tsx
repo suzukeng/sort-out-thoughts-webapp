@@ -19,7 +19,6 @@ export default function Home() {
   const [thoughtList, setThoughtList] = useState<Thought[]>([]);
   const [isEditing, setIsEditing] = useState<Boolean>(false);
   const [parentIndex, setParentIndex] = useState<number | undefined>(undefined);
-  let arr: string[] = []
   const [currentThought, setCurrentThought] = useState<Thought>(createNewThgout({ title: 'no title' }));
   useEffect(() => {
     console.log(index, thoughtList.length);
@@ -28,7 +27,7 @@ export default function Home() {
     setCurrentThought(thoughtList[index]);
     setParentIndex(thoughtList[index].parentIndex)
     console.log('更新後の中身', thoughtList)
-  }, [index])
+  }, [index, thoughtList, titleList])
 
   const addTitleList = (input: string) => {
     if (!input.length) return
@@ -72,24 +71,28 @@ export default function Home() {
   }
   return (
     <SessionEndAlart>
-      {isEditing ? (
-        <Center>
-          <Spinner size='xl' />
-        </Center>
-      ) : (
-        index >= 0 ? (
-          <>
-            <ShowTheme themeTitle={theme} />
-            <HStack marginTop='10px' alignItems="start">
-              <ThoughtCard thought={currentThought} createDerivation={createDerivation} />
-              <ShowTitleList titles={titleList} currentIndex={index} setIndex={setIndex} parentIndex={parentIndex} />
-            </HStack>
-          </>
-        ) :
-          (
-            <ThemeDecision handleSave={addTitleList} />
-          )
-      )}
+      <Center>
+        <VStack>
+          {isEditing ? (
+            <Center>
+              <Spinner size='xl' />
+            </Center>
+          ) : (
+            index >= 0 ? (
+              <>
+                <ShowTheme themeTitle={theme} />
+                <HStack marginTop='10px' alignItems="start">
+                  <ThoughtCard thought={currentThought} createDerivation={createDerivation} />
+                  <ShowTitleList titles={titleList} currentIndex={index} setIndex={setIndex} parentIndex={parentIndex} />
+                </HStack>
+              </>
+            ) :
+              (
+                <ThemeDecision handleSave={addTitleList} />
+              )
+          )}
+        </VStack>
+      </Center>
     </SessionEndAlart>
   );
 }
