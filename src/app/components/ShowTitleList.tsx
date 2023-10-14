@@ -8,9 +8,7 @@ interface props {
 }
 export default function ShowTitleList({ titles, currentIndex, setIndex, parentIndex }: props) {
     const reversedTitles = titles.map((_, i, a) => a[a.length - 1 - i])
-    console.log('currentIndex', currentIndex, reversedTitles.length);
     const pIndex: number = (parentIndex !== undefined && Number.isSafeInteger(parentIndex) ? parentIndex : -1)
-    console.log('pIndex', parentIndex, ':', pIndex)
     return (
         <Flex minH='400px' width='400px' justifyContent="space-between" border='2px' borderColor='blue.400' rounded='lg'
             bgColor='gray.50'

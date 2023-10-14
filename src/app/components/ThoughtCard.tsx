@@ -13,7 +13,6 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     const [currentThoughtList, setCurrentThoughtList] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState<string>('')
     useEffect(() => {
-        console.log('aaaa', thought.thoughtList);
         if (thought.thoughtList) setCurrentThoughtList(thought.thoughtList)
     }, [thought]);
     const thoughtOnSubmit = () => {
@@ -24,13 +23,11 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
             setErrorMessage('')
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.log(error.issues[0].message);
                 setErrorMessage(error.issues[0].message);
             }
         }
     };
     const createNewDerivation = (newTheme: string) => {
-        console.log("新しい出力:", newTheme);
         createDerivation(newTheme, thought.title, currentThoughtList)
     };
     const delThoughtListItem = (id: number) => {

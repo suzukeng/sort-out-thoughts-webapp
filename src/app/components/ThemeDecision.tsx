@@ -17,7 +17,6 @@ export default function ThemeDecision({ handleSave }: Props) {
             handleSave(input);
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.log(error.issues[0].message);
                 setErrorMessage(error.issues[0].message);
             }
         }
