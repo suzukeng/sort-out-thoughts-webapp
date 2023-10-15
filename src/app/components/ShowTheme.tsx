@@ -1,4 +1,4 @@
-import { HStack, Box, Flex, Center, Text, Heading } from "@chakra-ui/react";
+import { Box, Text, Heading } from "@chakra-ui/react";
 interface props {
     themeTitle: string
 }

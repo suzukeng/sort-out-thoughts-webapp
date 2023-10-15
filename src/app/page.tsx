@@ -30,16 +30,17 @@ export default function Home() {
     if (!input.length) return
     if (!theme.length) setTheme(input);
     setIsEditing(true)
-    setThoughtList([...thoughtList, createNewThgout({ title: input })])
-    setTitleList([...titleList, input])
-    setIndex((index) => index + 1)
+    setThoughtList(thoughtList => [...thoughtList, createNewThgout({ title: input })])
+    setTitleList(titleList => [...titleList, input])
+    setIndex(index => index + 1)
     setIsEditing(false)
   }
   const createDerivation = (input: string, parentTitle: string, updatedThoughtList: string[]) => {
     if (!input.length) return
-    if (titleList.length > 20) {
-      //TODO:バリデーションとタイトルの最大数の検討
-      console.log('20個以上派生を作ることはできません')
+    if (titleList.length >= 14) {
+      //TODO:バリデーションの実装とタイトルの最大数の検討
+      console.log('15個以上派生を作ることはできません')
+      return;
     }
     setIsEditing(true)
     const updatedThought: Thought = createNewThgout({
@@ -54,7 +55,7 @@ export default function Home() {
     const prevTitleListLength = titleList.length;
     setThoughtList(thoughtList => [...thoughtList, createNewThgout({ parentIndex: index, title: input, parentTitle })])
     setTitleList(titleList => [...titleList, input])
-    setIndex(index => prevTitleListLength)
+    setIndex(prevTitleListLength)
     setIsEditing(false)
   }
   return (
