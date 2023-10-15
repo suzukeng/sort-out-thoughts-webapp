@@ -17,7 +17,6 @@ export default function ThemeDecision({ handleSave }: Props) {
             handleSave(input);
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.log(error.issues[0].message);
                 setErrorMessage(error.issues[0].message);
             }
         }
@@ -41,11 +40,12 @@ export default function ThemeDecision({ handleSave }: Props) {
                         p={10}
                     />
                     <Text color='gray.500' fontSize='2xl'>
-                        考えや悩みを整理しましょう
+                        考えや悩みを整理しましょう！
                     </Text>
                     <Flex width='700px' height='120px' justifyContent="space-between" p={4}>
                         <FormControl isInvalid={isError}>
-                            <Input type='text' height='60px' placeholder='整理したいテーマを入力してください' fontSize='md'
+                            <Input type='text' height='60px' placeholder='整理したいテーマを入力してください'
+                                fontSize='md'
                                 bgColor='gray.100'
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
                                 value={input} />

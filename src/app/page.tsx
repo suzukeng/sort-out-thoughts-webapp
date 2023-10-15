@@ -21,32 +21,27 @@ export default function Home() {
   const [parentIndex, setParentIndex] = useState<number | undefined>(undefined);
   const [currentThought, setCurrentThought] = useState<Thought>(createNewThgout({ title: 'no title' }));
   useEffect(() => {
-    console.log(index, thoughtList.length);
-    console.log(titleList.length, titleList);
     if (index < 0 || index >= thoughtList.length) return;
     setCurrentThought(thoughtList[index]);
     setParentIndex(thoughtList[index].parentIndex)
-    console.log('更新後の中身', thoughtList)
   }, [index, thoughtList, titleList])
 
   const addTitleList = (input: string) => {
     if (!input.length) return
     if (!theme.length) setTheme(input);
-    console.log(input)
     setIsEditing(true)
-    setThoughtList([...thoughtList, createNewThgout({ title: input })])
-    setTitleList([...titleList, input])
-    setIndex((index) => index + 1)
-    console.log(titleList.length, titleList);
+    setThoughtList(thoughtList => [...thoughtList, createNewThgout({ title: input })])
+    setTitleList(titleList => [...titleList, input])
+    setIndex(index => index + 1)
     setIsEditing(false)
   }
   const createDerivation = (input: string, parentTitle: string, updatedThoughtList: string[]) => {
     if (!input.length) return
-    if (titleList.length > 20) {
-      //TODO:バリデーションとタイトルの最大数の検討
-      console.log('20個以上派生を作ることはできません')
+    if (titleList.length >= 14) {
+      //TODO:バリデーションの実装とタイトルの最大数の検討
+      console.log('15個以上派生を作ることはできません')
+      return;
     }
-    console.log('新しいタイトル', input)
     setIsEditing(true)
     const updatedThought: Thought = createNewThgout({
       parentIndex: currentThought.parentIndex,
@@ -54,19 +49,13 @@ export default function Home() {
       parentTitle: currentThought.parentTitle,
       thoughtList: updatedThoughtList
     })
-    console.log(updatedThought)
-    console.log('result', thoughtList.map((value: Thought, id: number) => (
-      index === id ? updatedThought : value
-    )))
     setThoughtList(thoughtList => thoughtList.map((value: Thought, id: number) => (
       index === id ? updatedThought : value
     )))
     const prevTitleListLength = titleList.length;
-    console.log()
     setThoughtList(thoughtList => [...thoughtList, createNewThgout({ parentIndex: index, title: input, parentTitle })])
     setTitleList(titleList => [...titleList, input])
-    setIndex(index => prevTitleListLength)
-    // console.log(titleList.length, titleList);
+    setIndex(prevTitleListLength)
     setIsEditing(false)
   }
   return (

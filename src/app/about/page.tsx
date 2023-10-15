@@ -12,7 +12,6 @@ export default async function about() {
     const { title, date } = data; // 記事のタイトル
     const processedContent = await remark().use(remarkBreaks).use(remarkHtml).process(content);
     const contentHtml = processedContent.toString(); // 記事の本文をHTMLに変換
-    console.log(contentHtml)
     return (
         <Center>
             <Container m={4} maxW='container.xl' bgColor='gray.50'>

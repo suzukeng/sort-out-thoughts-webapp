@@ -13,7 +13,6 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     const [currentThoughtList, setCurrentThoughtList] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState<string>('')
     useEffect(() => {
-        console.log('aaaa', thought.thoughtList);
         if (thought.thoughtList) setCurrentThoughtList(thought.thoughtList)
     }, [thought]);
     const thoughtOnSubmit = () => {
@@ -24,13 +23,11 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
             setErrorMessage('')
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.log(error.issues[0].message);
                 setErrorMessage(error.issues[0].message);
             }
         }
     };
     const createNewDerivation = (newTheme: string) => {
-        console.log("新しい出力:", newTheme);
         createDerivation(newTheme, thought.title, currentThoughtList)
     };
     const delThoughtListItem = (id: number) => {
@@ -40,14 +37,13 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
     };
     const isError = (errorMessage !== '')
     return (
-        <Card width='1050px' minH='700px' justifyContent="space-between" p={2} border='2px' borderColor='blue.400' bgColor='gray.50' marginBottom='10px' >
+        <Card width='1000px' minH='700px' justifyContent="space-between" p={2} border='2px' borderColor='blue.400' bgColor='gray.50' marginBottom='10px' >
             <CardHeader>
                 {thought.parentTitle ? (
                     <Text color='gray.500' fontSize='xl'>派生元タイトル :<Text as='span' fontSize='xl'>{thought.parentTitle}</Text></Text>
                 ) : (
                     <Text color='gray.500' fontSize='xl'>メインテーマ</Text>
-                )
-                }
+                )}
                 <Text as='b' fontSize='3xl'>
                     タイトル :
                     <Text as='span' fontSize='3xl' color='blue.500'>{thought.title}</Text>
@@ -71,8 +67,8 @@ export default function ThoughtCard({ thought, createDerivation }: props) {
                 </Box>
                 <VStack as='ul' marginTop='10px' marginLeft='20px' spacing='5px'>
                     {currentThoughtList.map((_, index: number, a: string[]) => (
-                        <Flex key={index} as='li' width='950px' minH='48px' justifyContent="space-between">
-                            <Box width='800px' minH='45px' border='2px' borderColor='blue.400' bgColor='white' rounded='md'><Text fontSize='30px'>{a[a.length - 1 - index]}</Text></Box>
+                        <Flex key={index} as='li' width='900px' minH='48px' justifyContent="space-between">
+                            <Box width='750px' minH='45px' border='2px' borderColor='blue.400' bgColor='white' rounded='md'><Text fontSize='30px'>{a[a.length - 1 - index]}</Text></Box>
                             <Button textColor='white' bgColor='blue.400' width='70px' marginLeft='5px' minH='45px' border='1px' borderColor='blue.100' onClick={() => createNewDerivation(a[a.length - 1 - index])}>派生</Button>
                             <Button textColor='white' bgColor='red.400' width='70px' marginLeft='5px' minH='45px' border='1px' borderColor='red.100' onClick={() => delThoughtListItem(a.length - index - 1)}>削除</Button>
                         </Flex >

@@ -1,4 +1,4 @@
-import AboutUiProvider from '../layout/AboutUiProvider'
+import AboutUiProvider from '../ChakraUiSettings/AboutUiProvider'
 export default function RootLayout({
     children,
 }: {
