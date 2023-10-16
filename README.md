@@ -1,6 +1,8 @@
-# SORT out THOUGHTs
+# SORT out THOUGHTs (demo)
 ## このアプリケーションついて
-悩みや考えを整理するメモアプリケーションです。本アプリケーションでできることはブレインストーミングに非常に似ていて、大まかな悩みを細分化し、原因解明や分析、整理を行うことを目的としています。
+悩みや考えを整理するメモアプリケーションです。本アプリケーションでできることはブレインストーミングに非常に似ていて、大まかな悩みを細分化し、原因解明や分析、整理を行うことを目的としています。なるべくシンプルな実装で機能を実現することを心がけました。
+
+<br>
 命名についてはthoughtとsortで日本語発音が似ていると思ったこととsort outで整理するという意味であるところから付けました。トップページのイラストもその考えをもとに作成しました。
 
 ## 動機
@@ -25,7 +27,10 @@
  - 派生関係の視覚性など
 
 これらを改善することが今後の課題です。
-## about web
+
+<br>
+
+# about web
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 
