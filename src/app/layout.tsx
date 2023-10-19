@@ -4,22 +4,32 @@ import Header from './components/Header'
 import Main from './components/Main'
 import UiProvider from './ChakraUiSettings/UiProvider'
 import type { Metadata } from 'next'
-
+const title = 'SORT out THOUGHTs! demo'
+const description = '考えや悩みを整理します。demo版'
 export const metadata: Metadata = {
-  title: 'SORT out THOUGHTs demo',
-  description: '考えや悩みを整理します。demo版',
+  title,
+  description,
   authors: [{ name: 'suzuken' }],
   openGraph: {
-    title: 'SORT out THOUGHTs img',
-    description: 'description',
-    //url: url,
-    siteName: 'SORT out THOUGHTs!',
+    title,
+    description,
+    url: 'https://sort-out-thoughts-webapp.vercel.app/',
+    siteName: title,
     images: {
       url: '/opengraph-image.png',
-      width: 1200,
-      height: 600,
+      width: 1000,
+      height: 700,
     },
-  }
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    site: '@suzuken_s',
+    creator: '@suzuken_s',
+  },
 }
 
 export default function RootLayout({
