@@ -33,4 +33,4 @@ description: "このアプリケーションについて"
 <br>
 
 ## github repository
-コードや使用したライブラリについては[こちら](https://github.com/suzukeng)からご確認ください。
+コードや使用したライブラリについては[こちら](https://github.com/suzukeng/sort-out-thoughts-webapp)からご確認ください。
