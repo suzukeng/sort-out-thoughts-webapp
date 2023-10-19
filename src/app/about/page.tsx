@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from "remark";
 import remarkHtml from "remark-html";
+import remarkGfm from 'remark-gfm';
 import remarkBreaks from "remark-breaks";
 import { Heading, Box, Container, Center, Text } from '@chakra-ui/react'
 export default async function about() {
@@ -10,7 +11,7 @@ export default async function about() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
     const { title, date } = data; // 記事のタイトル
-    const processedContent = await remark().use(remarkBreaks).use(remarkHtml).process(content);
+    const processedContent = await remark().use(remarkBreaks).use(remarkHtml).use(remarkGfm).process(content);
     const contentHtml = processedContent.toString(); // 記事の本文をHTMLに変換
     return (
         <Center>
