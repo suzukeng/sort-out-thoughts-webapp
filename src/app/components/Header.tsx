@@ -8,13 +8,28 @@ export const Header = () => {
     const pathname = usePathname()
     const aboutPageNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        if (pathname != '/about') {
+        if (pathname == '/') {
             const answer = window.confirm('入力したデータは保存されません。\n 本当にページ遷移しますか？')
             if (!answer) {
                 console.log('RouteChange abort')
             } else {
                 router.push('/about')
             }
+        } else {
+            router.push('/about')
+        }
+    };
+    const howtoPageNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        if (pathname == '/') {
+            const answer = window.confirm('入力したデータは保存されません。\n 本当にページ遷移しますか？')
+            if (!answer) {
+                console.log('RouteChange abort')
+            } else {
+                router.push('/howto')
+            }
+        } else {
+            router.push('/howto')
         }
     };
     return (
@@ -44,6 +59,17 @@ export const Header = () => {
                             href='/'
                         >
                             home
+                        </Button>
+                        <Button
+                            fontSize="md"
+                            color="black"
+                            bg="blue.50"
+                            _hover={{
+                                bg: 'blue.50'
+                            }}
+                            onClick={howtoPageNavigation}
+                        >
+                            howto
                         </Button>
                         <Button
                             fontSize="md"
